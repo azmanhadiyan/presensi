@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\file\FileInput;
+use kartik\select2\Select2;
+use app\models\Kelas;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Mahasiswa */
@@ -12,13 +16,26 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_mahasiswa')->textInput() ?>
+    <?= $form->field($model, 'nim')->textInput() ?>
 
-    <?= $form->field($model, 'Nim')->textInput() ?>
+    <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Nama')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_kelas')->widget(Select2::classname(), [
+                    'data' =>  Kelas::getListKelas(),
+                    'options' => [
+                      'placeholder' => '- Pilih Kelas-',              
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => false
+                    ],
+                ]); ?>
 
-    <?= $form->field($model, 'Jurusan')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($user, 'username')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($user, 'password')->passwordInput(['maxlength' => true]) ?>
+
+    <?= $form->field($user, 'status')->textInput(['maxlength' => true]) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

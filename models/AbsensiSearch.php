@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Mahasiswa;
+use app\models\Absensi;
 
 /**
- * MahasiswaSearch represents the model behind the search form of `app\models\Mahasiswa`.
+ * AbsensiSearch represents the model behind the search form of `app\models\Absensi`.
  */
-class MahasiswaSearch extends Mahasiswa
+class AbsensiSearch extends Absensi
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class MahasiswaSearch extends Mahasiswa
     public function rules()
     {
         return [
-            [['id_mahasiswa', 'nim', 'id'], 'integer'],
-            [['nama', 'id_kelas'], 'safe'],
+            [['id_presensi', 'id_jadwal', 'id_mahasiswa'], 'integer'],
+            [['tanggal', 'foto', 'kehadiran'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class MahasiswaSearch extends Mahasiswa
      */
     public function search($params)
     {
-        $query = Mahasiswa::find();
+        $query = Absensi::find();
 
         // add conditions that should always apply here
 
@@ -58,13 +58,14 @@ class MahasiswaSearch extends Mahasiswa
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id_presensi' => $this->id_presensi,
+            'id_jadwal' => $this->id_jadwal,
             'id_mahasiswa' => $this->id_mahasiswa,
-            'nim' => $this->nim,
-            'id' => $this->id,
+            'tanggal' => $this->tanggal,
         ]);
 
-        $query->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'id_kelas', $this->id_kelas]);
+        $query->andFilterWhere(['like', 'foto', $this->foto])
+            ->andFilterWhere(['like', 'kehadiran', $this->kehadiran]);
 
         return $dataProvider;
     }

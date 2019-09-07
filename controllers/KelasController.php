@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Mahasiswa;
-use app\models\MahasiswaSearch;
+use app\models\Kelas;
+use app\models\KelasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\User;
 
 /**
- * MahasiswaController implements the CRUD actions for Mahasiswa model.
+ * KelasController implements the CRUD actions for Kelas model.
  */
-class MahasiswaController extends Controller
+class KelasController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,12 +30,12 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Lists all Mahasiswa models.
+     * Lists all Kelas models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MahasiswaSearch();
+        $searchModel = new KelasSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Displays a single Mahasiswa model.
+     * Displays a single Kelas model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -59,33 +58,25 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Creates a new Mahasiswa model.
+     * Creates a new Kelas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Mahasiswa();
-        $user = new User();
+        $model = new Kelas();
 
-        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
-        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
-        $user->id_role = 3;
-        $user->save();
-        $model->id = $user->id;
-        $model->save();
-            return $this->redirect(['view', 'id' => $model->id_mahasiswa]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_kelas]);
         }
 
-        
         return $this->render('create', [
             'model' => $model,
-            'user' => $user,
         ]);
     }
 
     /**
-     * Updates an existing Mahasiswa model.
+     * Updates an existing Kelas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +87,7 @@ class MahasiswaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_mahasiswa]);
+            return $this->redirect(['view', 'id' => $model->id_kelas]);
         }
 
         return $this->render('update', [
@@ -105,7 +96,7 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Deletes an existing Mahasiswa model.
+     * Deletes an existing Kelas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -119,15 +110,15 @@ class MahasiswaController extends Controller
     }
 
     /**
-     * Finds the Mahasiswa model based on its primary key value.
+     * Finds the Kelas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Mahasiswa the loaded model
+     * @return Kelas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Mahasiswa::findOne($id)) !== null) {
+        if (($model = Kelas::findOne($id)) !== null) {
             return $model;
         }
 

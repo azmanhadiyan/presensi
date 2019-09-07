@@ -4,26 +4,28 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\MahasiswaSearch */
+/* @var $model app\models\AbsensiSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mahasiswa-search">
+<div class="absensi-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'id_presensi') ?>
+
+    <?= $form->field($model, 'id_jadwal') ?>
+
     <?= $form->field($model, 'id_mahasiswa') ?>
 
-    <?= $form->field($model, 'nim') ?>
+    <?= $form->field($model, 'tanggal') ?>
 
-    <?= $form->field($model, 'nama') ?>
+    <?= $form->field($model, 'foto') ?>
 
-    <?= $form->field($model, 'id_kelas') ?>
-
-    <?= $form->field($model, 'id') ?>
+    <?php // echo $form->field($model, 'kehadiran') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

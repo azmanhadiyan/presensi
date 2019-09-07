@@ -8,12 +8,14 @@ use Yii;
  * This is the model class for table "mahasiswa".
  *
  * @property int $id_mahasiswa
- * @property int $Nim
- * @property string $Nama
- * @property string $Jurusan
+ * @property int $nim
+ * @property string $nama
+ * @property int $id_kelas
+ * @property int $id
  *
- * @property Presensi $mahasiswa
- * @property Presensi[] $presensis
+ * @property Absensi[] $absensis
+ * @property User $id0
+ * @property Kelas $kelas
  */
 class Mahasiswa extends \yii\db\ActiveRecord
 {
@@ -31,10 +33,10 @@ class Mahasiswa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nim', 'Nama', 'Jurusan'], 'required'],
-            [['Nim'], 'integer'],
-            [['Nama', 'Jurusan'], 'string', 'max' => 50],
-            [['id_mahasiswa'], 'exist', 'skipOnError' => true, 'targetClass' => Presensi::className(), 'targetAttribute' => ['id_mahasiswa' => 'id_matakuliah']],
+            [['nim', 'nama', 'id_kelas', 'id'], 'required'],
+            [['nim', 'id_kelas', 'id'], 'integer'],
+            [['nama'], 'string', 'max' => 50],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -45,25 +47,34 @@ class Mahasiswa extends \yii\db\ActiveRecord
     {
         return [
             'id_mahasiswa' => 'Id Mahasiswa',
-            'Nim' => 'Nim',
-            'Nama' => 'Nama',
-            'Jurusan' => 'Jurusan',
+            'nim' => 'Nim',
+            'nama' => 'Nama',
+            'id_kelas' => 'Id Kelas',
+            'id' => 'ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMahasiswa()
+    public function getAbsensis()
     {
-        return $this->hasOne(Presensi::className(), ['id_matakuliah' => 'id_mahasiswa']);
+        return $this->hasMany(Absensi::className(), ['id_mahasiswa' => 'id_mahasiswa']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPresensis()
+    public function getId()
     {
-        return $this->hasMany(Presensi::className(), ['id_mahasiswa' => 'Id_mahasiswa']);
+        return $this->hasOne(User::className(), ['id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKelas()
+    {
+        return $this->hasOne(Kelas::className(), ['id_kelas' => 'id_kelas']);
     }
 }

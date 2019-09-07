@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "matakuliah".
+ * This is the model class for table "ruangan".
  *
- * @property int $id_matakuliah
- * @property string $matkul
+ * @property int $id_ruangan
+ * @property string $nama_ruangan
  *
  * @property Jadwal[] $jadwals
  */
-class Matakuliah extends \yii\db\ActiveRecord
+class Ruangan extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'matakuliah';
+        return 'ruangan';
     }
 
     /**
@@ -28,8 +28,8 @@ class Matakuliah extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['matkul'], 'required'],
-            [['matkul'], 'string', 'max' => 50],
+            [['nama_ruangan'], 'required'],
+            [['nama_ruangan'], 'string', 'max' => 15],
         ];
     }
 
@@ -39,8 +39,8 @@ class Matakuliah extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_matakuliah' => 'Id Matakuliah',
-            'matkul' => 'Matkul',
+            'id_ruangan' => 'Id Ruangan',
+            'nama_ruangan' => 'Nama Ruangan',
         ];
     }
 
@@ -49,6 +49,6 @@ class Matakuliah extends \yii\db\ActiveRecord
      */
     public function getJadwals()
     {
-        return $this->hasMany(Jadwal::className(), ['id_matakuliah' => 'id_matakuliah']);
+        return $this->hasMany(Jadwal::className(), ['id_ruangan' => 'id_ruangan']);
     }
 }

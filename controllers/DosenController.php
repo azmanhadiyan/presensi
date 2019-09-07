@@ -8,6 +8,8 @@ use app\models\DosenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\User;
+
 
 /**
  * DosenController implements the CRUD actions for Dosen model.
@@ -65,13 +67,21 @@ class DosenController extends Controller
     public function actionCreate()
     {
         $model = new Dosen();
+        $user = new User();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
+        $user->id_role = 2;
+        $user->save();
+        $model->id = $user->id;
+        $model->save();
+
             return $this->redirect(['view', 'id' => $model->id_dosen]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 

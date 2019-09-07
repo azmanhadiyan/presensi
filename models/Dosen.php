@@ -10,8 +10,10 @@ use Yii;
  * @property int $id_dosen
  * @property int $NIDN
  * @property string $Nama
+ * @property int $id
  *
- * @property Presensi[] $presensis
+ * @property User $id0
+ * @property Jadwal[] $jadwals
  */
 class Dosen extends \yii\db\ActiveRecord
 {
@@ -29,9 +31,10 @@ class Dosen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['NIDN', 'Nama'], 'required'],
-            [['NIDN'], 'integer'],
+            [['NIDN', 'Nama', 'id'], 'required'],
+            [['NIDN', 'id'], 'integer'],
             [['Nama'], 'string', 'max' => 50],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -44,14 +47,23 @@ class Dosen extends \yii\db\ActiveRecord
             'id_dosen' => 'Id Dosen',
             'NIDN' => 'Nidn',
             'Nama' => 'Nama',
+            'id' => 'ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPresensis()
+    public function getId0()
     {
-        return $this->hasMany(Presensi::className(), ['id_dosen' => 'id_dosen']);
+        return $this->hasOne(User::className(), ['id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getJadwals()
+    {
+        return $this->hasMany(Jadwal::className(), ['id_dosen' => 'id_dosen']);
     }
 }

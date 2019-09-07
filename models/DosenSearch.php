@@ -17,7 +17,7 @@ class DosenSearch extends Dosen
     public function rules()
     {
         return [
-            [['id_dosen', 'NIDN'], 'integer'],
+            [['id_dosen', 'NIDN', 'id'], 'integer'],
             [['Nama'], 'safe'],
         ];
     }
@@ -60,6 +60,7 @@ class DosenSearch extends Dosen
         $query->andFilterWhere([
             'id_dosen' => $this->id_dosen,
             'NIDN' => $this->NIDN,
+            'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'Nama', $this->Nama]);
