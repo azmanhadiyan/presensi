@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "mahasiswa".
@@ -49,7 +50,7 @@ class Mahasiswa extends \yii\db\ActiveRecord
             'id_mahasiswa' => 'Id Mahasiswa',
             'nim' => 'Nim',
             'nama' => 'Nama',
-            'id_kelas' => 'Id Kelas',
+            'id_kelas' => 'Kelas',
             'id' => 'ID',
         ];
     }
@@ -77,4 +78,21 @@ class Mahasiswa extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Kelas::className(), ['id_kelas' => 'id_kelas']);
     }
+
+    Public function getNamaKelas()
+    {
+        $model = Kelas::find()
+            ->andWhere(['id_kelas' => $this->id_kelas])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama_kelas;
+        }
+    }
+
+    public static function getListMahasiswa()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id_mahasiswa', 'nama');
+    }
+
 }

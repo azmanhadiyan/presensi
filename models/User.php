@@ -63,9 +63,20 @@ class User  extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRole()
+    // public function getRole()
+    // {
+    //     return $this->hasOne(Role::className(), ['id_role' => 'id_role']);
+    // }
+
+    Public function getIdRole()
     {
-        return $this->hasOne(Role::className(), ['id_role' => 'id_role']);
+        $model = Role::find()
+            ->andWhere(['id_role' => $this->id_role])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama;
+        }
     }
 
     public static function findIdentity($id)
@@ -103,5 +114,14 @@ class User  extends \yii\db\ActiveRecord implements IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    Public function getStatus()
+    {
+        if ($this->status == 1) {
+            return "Aktif";
+        }else{
+            return "Non Aktif";
+        }
     }
 }

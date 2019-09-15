@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "jadwal".
@@ -41,7 +42,7 @@ class Jadwal extends \yii\db\ActiveRecord
             [['jam', 'id_matakuliah', 'id_kelas', 'id_ruangan', 'status', 'id_dosen'], 'required'],
             [['jam'], 'safe'],
             [['id_matakuliah', 'id_kelas', 'id_ruangan', 'id_dosen'], 'integer'],
-            [['status'], 'string'],
+            [['status','nama_jadwal'], 'string'],
             [['id_dosen'], 'exist', 'skipOnError' => true, 'targetClass' => Dosen::className(), 'targetAttribute' => ['id_dosen' => 'id_dosen']],
             [['id_matakuliah'], 'exist', 'skipOnError' => true, 'targetClass' => Matakuliah::className(), 'targetAttribute' => ['id_matakuliah' => 'id_matakuliah']],
             [['id_ruangan'], 'exist', 'skipOnError' => true, 'targetClass' => Ruangan::className(), 'targetAttribute' => ['id_ruangan' => 'id_ruangan']],
@@ -56,6 +57,7 @@ class Jadwal extends \yii\db\ActiveRecord
     {
         return [
             'id_jadwal' => 'Id Jadwal',
+            'nama_jadwal' => 'Nama Jadwal',
             'jam' => 'Jam',
             'id_matakuliah' => 'Id Matakuliah',
             'id_kelas' => 'Id Kelas',
@@ -111,5 +113,44 @@ class Jadwal extends \yii\db\ActiveRecord
     public function getKelas0()
     {
         return $this->hasOne(Kelas::className(), ['id_kelas' => 'id_kelas']);
+    }
+
+    public static function getListJadwal()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id_jadwal', 'nama_jadwal');
+    }
+
+    Public function getIdMatkul()
+    {
+        $model = Matakuliah::find()
+            ->andWhere(['id_matakuliah' => $this->id_matakuliah])
+            ->one();
+
+        if ($model !== null) {
+            return $model->matkul;
+        }
+    }
+
+
+    Public function getIdRuangan()
+    {
+        $model = Ruangan::find()
+            ->andWhere(['id_ruangan' => $this->id_ruangan])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama_ruangan;
+        }
+    }
+
+    Public function getIdKelas()
+    {
+        $model = Kelas::find()
+            ->andWhere(['id_kelas' => $this->id_kelas])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama_kelas;
+        }
     }
 }

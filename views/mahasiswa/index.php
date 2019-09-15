@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Kelas;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MahasiswaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mahasiswas';
+$this->title = 'Mahasiswa';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mahasiswa-index">
@@ -26,11 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_mahasiswa',
+            // 'id_mahasiswa',
             'nim',
             'nama',
-            'id_kelas',
-            'id',
+            [
+                'attribute'=>'id_kelas',
+                'value'=>function($data){
+                    return $data->getNamaKelas();
+                }
+            ],
+            // 'id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "dosen".
@@ -45,7 +46,7 @@ class Dosen extends \yii\db\ActiveRecord
     {
         return [
             'id_dosen' => 'Id Dosen',
-            'NIDN' => 'Nidn',
+            'NIDN' => 'NIDN',
             'Nama' => 'Nama',
             'id' => 'ID',
         ];
@@ -66,4 +67,10 @@ class Dosen extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Jadwal::className(), ['id_dosen' => 'id_dosen']);
     }
+
+    public static function getListDosen()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id_dosen', 'Nama');
+    }
+
 }

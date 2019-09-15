@@ -34,7 +34,10 @@ use app\models\User;
 
     <?= $form->field($user, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($user, 'status')->textInput(['maxlength' => true]) ?>
+    <?=  $form->field($user, 'status')->dropDownList([
+                    '0' => 'Tidak Aktif',
+                    '1'=>'Aktif'
+                ]); ?>
 
 
     <div class="form-group">

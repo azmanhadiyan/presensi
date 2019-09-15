@@ -28,9 +28,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id_jadwal',
             'jam',
-            'id_matakuliah',
-            'id_kelas',
-            'id_ruangan',
+            [
+                'attribute'=>'id_matakuliah',
+                'value'=>function($data){
+                    return $data->getIdMatkul();
+                }
+            ],
+            [
+                'attribute'=>'id_kelas',
+                'value'=>function($data){
+                    return $data->getIdKelas();
+                }
+            ],
+            [
+                'attribute'=>'id_ruangan',
+                'value'=>function($data){
+                    return $data->getIdRuangan();
+                }
+            ],
             //'status',
             //'id_dosen',
 

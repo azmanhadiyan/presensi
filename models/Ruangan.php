@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ruangan".
@@ -51,4 +52,10 @@ class Ruangan extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Jadwal::className(), ['id_ruangan' => 'id_ruangan']);
     }
+
+    public static function getListRuangan()
+    {
+        return ArrayHelper::map(self::find()->all(), 'id_ruangan', 'nama_ruangan');
+    }
+
 }

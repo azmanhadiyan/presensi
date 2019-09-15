@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Kelas;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\KelasSearch */
@@ -26,8 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_kelas',
-            'id_jurusan',
+            // 'id_kelas',
+            
+            [
+                'attribute'=>'id_jurusan',
+                'value'=>function($data){
+                    return $data->getIdJurusan();
+                }
+            ],
             'angkatan',
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -8,6 +8,7 @@ use app\models\AbsensiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AbsensiController implements the CRUD actions for Absensi model.
@@ -66,7 +67,31 @@ class AbsensiController extends Controller
     {
         $model = new Absensi();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $name = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+
+            $structure = '../files/'.$name;
+            //membuat folder
+             if (!mkdir($structure, 0777, true)) {
+                die('Gagal membuat folder...');
+            }else{
+                $model->folder = $structure;
+            }
+
+            $img = UploadedFile::getInstance($model, 'foto');
+            if (!empty($img)) {
+                if(is_object($img))
+                {
+                    $model->foto = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+                    $model->foto .='img.'.$img->extension;
+
+                    $path = $structure."/".$model->foto;
+                    $img->saveAs($path, false);
+                }
+            }
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id_presensi]);
         }
 

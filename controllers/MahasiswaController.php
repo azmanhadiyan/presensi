@@ -94,13 +94,23 @@ class MahasiswaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = User::find()
+        ->andWhere(['id' => $id ])
+        ->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
+        $user->id_role = 3;
+        $user->save();
+        $model->id = $user->id;
+        $model->save();
             return $this->redirect(['view', 'id' => $model->id_mahasiswa]);
         }
 
+
         return $this->render('update', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Jadwal;
 use app\models\JadwalSearch;
+use app\models\Matakuliah;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,8 +66,11 @@ class JadwalController extends Controller
     public function actionCreate()
     {
         $model = new Jadwal();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        if ($model->load(Yii::$app->request->post())) {
+            $nama_jadwal = $model->getIdMatkul($model->id_matakuliah)." - ".$model->getIdKelas($model->id_kelas);
+            $model->nama_jadwal = $nama_jadwal;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id_jadwal]);
         }
 
@@ -74,6 +78,7 @@ class JadwalController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Updates an existing Jadwal model.

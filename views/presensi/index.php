@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\PresensiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Presensis';
+$this->title = 'Presensi';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="presensi-index">
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_presensi',
+            // 'id_presensi',
             'id_mahasiswa',
             'id_dosen',
             'id_matakuliah',

@@ -66,8 +66,12 @@ class KelasController extends Controller
     {
         $model = new Kelas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $nama = $model->getIdJurusan($model->id_jurusan)." - ".$model->angkatan;
+            $model->nama_kelas = $nama;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id_kelas]);
+
         }
 
         return $this->render('create', [

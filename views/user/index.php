@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserSearch */
@@ -29,8 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'password',
-            'id_role',
-            'status',
+            [
+                'attribute'=>'id_role',
+                'value'=>function($data){
+                    return $data->getIdRole();
+                }
+            ],
+            [
+                    'attribute'=>'status',
+                    'value'=>function($data){
+                        return $data->getStatus();
+                    },
+                   
+                ],
             //'authKey',
 
             ['class' => 'yii\grid\ActionColumn'],
