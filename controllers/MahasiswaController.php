@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\User;
-
+use yii\filters\AccessControl;
 /**
  * MahasiswaController implements the CRUD actions for Mahasiswa model.
  */
@@ -21,6 +21,29 @@ class MahasiswaController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'rules'=>[
+                    [
+                        'actions'=>[
+                        'update',
+                        'delete',
+                    ],
+                    'allow'=>true,
+                    'matchCallback'=>function(){
+                        return(
+                            Yii::$app->user->identity->id_role=='3'
+                        );
+                    }
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index','view'],
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+               
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

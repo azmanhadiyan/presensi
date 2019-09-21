@@ -10,7 +10,13 @@
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i><?php 
+               if (Yii::$app->user->identity->id_role) {
+                 echo  Yii::$app->user->identity->id_role;
+               }
+                
+
+                ?></a>
             </div>
         </div>
 
@@ -25,51 +31,40 @@
             </div>
         </form>
         <!-- /.search form -->
+        <?php
+            $items = [];
+            $items[] = ['label' => 'Menu Yii2', 'options' => ['class' => 'header']];
+             if (Yii::$app->user->identity->id_role=='3'){
 
+                         $items[] = ['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
+                         $items[] =['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']];
+
+                    } elseif (Yii::$app->user->identity->id_role=='2') {
+                         $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
+                         $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
+
+                    }else{
+                        $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
+                        $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
+                         $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
+                         $items[] =['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']];
+                         $items[] =['label' => 'Matakuliah', 'icon' => 'dashboard', 'url' => ['/matakuliah']];
+                         $items[] =['label' => 'Kelas', 'icon' => 'dashboard', 'url' => ['/kelas']];
+                         $items[] =['label' => 'Jurusan', 'icon' => 'dashboard', 'url' => ['/jurusan']];
+                         $items[] =['label' => 'Ruangan', 'icon' => 'dashboard', 'url' => ['/ruangan']];
+                         $items[] =['label' => 'Role', 'icon' => 'dashboard', 'url' => ['/role']];
+                         $items[] =['label' => 'User', 'icon' => 'dashboard', 'url' => ['/user']];
+                    }
+        ?>
         <?= dmstr\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
-                'items' => [
-                    ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
-                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
-                    ['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']],
-                    ['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']],
-                    ['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']],
-                    ['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']],
-                    ['label' => 'Matakuliah', 'icon' => 'dashboard', 'url' => ['/matakuliah']],
-                    ['label' => 'Kelas', 'icon' => 'dashboard', 'url' => ['/kelas']],
-                    ['label' => 'Jurusan', 'icon' => 'dashboard', 'url' => ['/jurusan']],
-                    ['label' => 'Ruangan', 'icon' => 'dashboard', 'url' => ['/ruangan']],
-                    ['label' => 'Role', 'icon' => 'dashboard', 'url' => ['/role']],
-                    ['label' => 'User', 'icon' => 'dashboard', 'url' => ['/user']],
-                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'items' => $items,
+                    
+
+                   
+
+                      
             ]
         ) ?>
 

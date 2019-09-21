@@ -8,12 +8,12 @@ use app\models\User;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'User';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
 
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'username',
             'password',
             [

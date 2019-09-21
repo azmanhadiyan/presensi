@@ -27,8 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             // 'id_presensi',
-            'id_jadwal',
-            'id_mahasiswa',
+            
+            [
+                'attribute'=>'id_jadwal',
+                'value'=>function($data){
+                    return $data->getNamaJadwal();
+                }
+            ],
+            [
+                'attribute'=>'id_mahasiswa',
+                'value'=>function($data){
+                    return $data->getIdMahasiswa();
+                }
+            ],
             'tanggal',
             'foto',
             //'kehadiran',

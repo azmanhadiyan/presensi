@@ -49,9 +49,9 @@ class Absensi extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_presensi' => 'Id Presensi',
-            'id_jadwal' => 'Id Jadwal',
-            'id_mahasiswa' => 'Id Mahasiswa',
+            'id_presensi' => 'Presensi',
+            'id_jadwal' => 'Jadwal',
+            'id_mahasiswa' => 'Mahasiswa',
             'tanggal' => 'Tanggal',
             'foto' => 'Foto',
             'kehadiran' => 'Kehadiran',
@@ -72,5 +72,27 @@ class Absensi extends \yii\db\ActiveRecord
     public function getMahasiswa()
     {
         return $this->hasOne(Mahasiswa::className(), ['id_mahasiswa' => 'id_mahasiswa']);
+    }
+
+    Public function getIdMahasiswa()
+    {
+        $model = Mahasiswa::find()
+            ->andWhere(['id_mahasiswa' => $this->id_mahasiswa])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama;
+        }
+    }
+
+    Public function getNamaJadwal()
+    {
+        $model = Jadwal::find()
+            ->andWhere(['id_jadwal' => $this->id_jadwal])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama_jadwal;
+        }
     }
 }

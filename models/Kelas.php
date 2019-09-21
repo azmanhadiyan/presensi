@@ -47,8 +47,8 @@ class Kelas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_kelas' => 'Id Kelas',
-            'id_jurusan' => 'Id Jurusan',
+            'id_kelas' => 'Kelas',
+            'id_jurusan' => 'Jurusan',
             'angkatan' => 'Angkatan',
             'nama_kelas' => 'Nama Kelas'
 

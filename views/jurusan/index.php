@@ -7,12 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\JurusanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Jurusans';
+$this->title = 'Jurusan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jurusan-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1></h1>
 
     <p>
         <?= Html::a('Create Jurusan', ['create'], ['class' => 'btn btn-success']) ?>

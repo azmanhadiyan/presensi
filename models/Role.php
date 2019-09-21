@@ -39,7 +39,7 @@ class Role extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_role' => 'Id Role',
+            'id_role' => 'Role',
             'nama' => 'Nama',
         ];
     }

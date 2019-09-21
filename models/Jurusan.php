@@ -40,7 +40,7 @@ class Jurusan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_jurusan' => 'Id Jurusan',
+            'id_jurusan' => 'Jurusan',
             'nama_jurusan' => 'Nama Jurusan',
         ];
     }

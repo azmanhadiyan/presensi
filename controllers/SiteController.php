@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -18,17 +19,28 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
+              'access' => [  
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index','about','contact','logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'actions' => ['login', 'register'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        //see captcha and error added here, this fixes the issue
+                        'actions' => ['terms', 'forgot', 'captcha', 'error', 'register'],
+                        'allow' => true,
+                        'roles' => ['?', '@'],
+                    ],
                 ],
             ],
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

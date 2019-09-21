@@ -40,7 +40,7 @@ class Ruangan extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_ruangan' => 'Id Ruangan',
+            'id_ruangan' => 'Ruangan',
             'nama_ruangan' => 'Nama Ruangan',
         ];
     }

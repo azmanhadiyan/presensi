@@ -56,14 +56,14 @@ class Jadwal extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_jadwal' => 'Id Jadwal',
+            'id_jadwal' => 'Jadwal',
             'nama_jadwal' => 'Nama Jadwal',
             'jam' => 'Jam',
-            'id_matakuliah' => 'Id Matakuliah',
-            'id_kelas' => 'Id Kelas',
-            'id_ruangan' => 'Id Ruangan',
+            'id_matakuliah' => 'Matakuliah',
+            'id_kelas' => 'Kelas',
+            'id_ruangan' => 'Ruangan',
             'status' => 'Status',
-            'id_dosen' => 'Id Dosen',
+            'id_dosen' => 'Dosen',
         ];
     }
 
