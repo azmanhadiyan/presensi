@@ -28,17 +28,18 @@ class MahasiswaController extends Controller
                         'actions'=>[
                         'update',
                         'delete',
+                        'view',
                     ],
                     'allow'=>true,
                     'matchCallback'=>function(){
                         return(
-                            Yii::$app->user->identity->id_role=='3'
+                            Yii::$app->user->identity->id_role=='1'
                         );
                     }
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','view'],
+                        'actions' => ['index','view', 'create'],
                         'roles' => ['@'],
                     ],
                 ],

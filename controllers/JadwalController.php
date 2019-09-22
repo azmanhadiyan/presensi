@@ -129,4 +129,25 @@ class JadwalController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionDetail()
+    {        
+        if (isset($_POST['expandRowKey'])) {
+            $kelas = Yii::$app->request->post('id_kelas');
+
+            $model = Kelas::find()
+                ->where(['mahasiswa' => $mahasiswa]);
+            $dataProvider = new ActiveDataProvider([
+                'query' => $model,
+                'pagination' => [
+                    'pageSize' => 20,
+                ],
+            ]);
+
+            return $this->renderPartial('_attendance-details', ['dataProvider' => $dataProvider]);
+
+        } else {
+            return '<div class="alert alert-danger">No data found</div>';
+        }
+    }
 }

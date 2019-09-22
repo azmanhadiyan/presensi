@@ -14,8 +14,6 @@
                if (Yii::$app->user->identity->id_role) {
                  echo  Yii::$app->user->identity->id_role;
                }
-                
-
                 ?></a>
             </div>
         </div>
