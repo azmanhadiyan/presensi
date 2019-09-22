@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_matakuliah')->textInput() ?>
 
-    <?= $form->field($model, 'Tgl_presensi')->textInput() ?>
+    <?= $form->field($model, 'Tgl_presensi')->date() ?>
 
     <?= $form->field($model, 'hasil_presensi')->textInput(['maxlength' => true]) ?>
 

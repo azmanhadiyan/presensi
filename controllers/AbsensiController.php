@@ -68,7 +68,7 @@ class AbsensiController extends Controller
         $model = new Absensi();
 
         if ($model->load(Yii::$app->request->post())) {
-
+            $model->tanggal = date('Y-m-d');
             $name = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
 
             $structure = '../files/'.$name;

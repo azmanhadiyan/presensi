@@ -36,9 +36,6 @@ use kartik\file\FileInput;
                         'allowClear' => false
                     ],
                 ]); ?>
-
-    <?= $form->field($model, 'tanggal')->textInput() ?>
-
    
      <?= $form->field($model, 'foto')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],

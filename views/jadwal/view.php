@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Jadwal */
 
-$this->title = $model->id_jadwal;
+$this->title = $model->nama_jadwal;
 $this->params['breadcrumbs'][] = ['label' => 'Jadwals', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -14,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="jadwal-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id_jadwal], ['class' => 'btn btn-primary']) ?>
@@ -24,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        
     </p>
 
     <?= DetailView::widget([
@@ -48,9 +51,48 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getIdRuangan();
                 }
             ],
-            //'status',
+             [
+                'attribute'=>'tanggal',
+                'value'=>date('Y-m-d'),
+            ],
+            'status',
             //'id_dosen',
         ],
     ]) ?>
+
+    <?php
+            if ($model->status=="Buka") {
+                $text = "Tutup";
+            }else{
+                $text = "Buka";
+            }
+        ?>
+
+        <?= Html::a($text, ['status', 'id' => $model->id_jadwal,'status'=>$text], ['class' => 'btn btn-success','style'=>'width:100%;']) ?>
+        <?php
+            
+        ?>
+    
+
+     <?= GridView::widget([
+        'dataProvider' => $jadwal,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            // 'id_jadwal',
+            [
+                'attribute'=>'id_mahasiswa',
+                'value'=>function($data){
+                    return $data->getIdMahasiswa();
+                }
+            ],
+            'tanggal',
+            'kehadiran',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+
+
 
 </div>

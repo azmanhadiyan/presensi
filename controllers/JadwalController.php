@@ -4,11 +4,14 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Jadwal;
+use app\models\Absensi;
+use app\models\Mahasiswa;
 use app\models\JadwalSearch;
 use app\models\Matakuliah;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * JadwalController implements the CRUD actions for Jadwal model.
@@ -53,8 +56,27 @@ class JadwalController extends Controller
      */
     public function actionView($id)
     {
+        $jadwal = Jadwal::find()
+                ->andWhere(['id_jadwal' => $id])
+                ->one();
+
+        $idkelas = $jadwal->id_kelas;
+
+        $query = Absensi::find()
+                ->andWhere(['id_jadwal' => $id]);
+
+       $provider = new ActiveDataProvider([
+          'query' => $query,
+          'pagination' => [
+             'pageSize' => 2,
+          ],
+       ]);
+       // returns an array of users objects
+       $jadwal = $provider->getModels();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'jadwal' => $provider,
         ]);
     }
 
@@ -98,6 +120,15 @@ class JadwalController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionStatus($id,$status)
+    {
+        $model = $this->findModel($id);
+        $model->status = $status; 
+        if ($model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_jadwal]);
+        }
     }
 
     /**

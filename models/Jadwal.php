@@ -117,7 +117,7 @@ class Jadwal extends \yii\db\ActiveRecord
 
     public static function getListJadwal()
     {
-        return ArrayHelper::map(self::find()->all(), 'id_jadwal', 'nama_jadwal');
+        return ArrayHelper::map(self::find()->andWhere(['status' => 'Buka'])->all(), 'id_jadwal', 'nama_jadwal');
     }
 
     Public function getIdMatkul()
@@ -151,6 +151,16 @@ class Jadwal extends \yii\db\ActiveRecord
 
         if ($model !== null) {
             return $model->nama_kelas;
+        }
+    }
+
+    Public function getKelasMahasiswa()
+    {
+        $model = Mahasiswa::find()
+            ->all();
+
+        if ($model !== null) {
+            return $model;
         }
     }
 }

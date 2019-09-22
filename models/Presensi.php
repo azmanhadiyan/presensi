@@ -26,7 +26,7 @@ class Presensi extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'presensi';
+        return 'absensi';
     }
 
     /**
