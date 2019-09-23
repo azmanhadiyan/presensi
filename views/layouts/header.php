@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">Presensi</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -40,9 +40,9 @@ use yii\helpers\Html;
                                 <?=Yii::$app->user->identity->username?>
                                 <small>
                                     <?php
-                                        if (Yii::$app->user->identity->id_role = "1") {
+                                        if (Yii::$app->user->identity->id_role == "1") {
                                             echo  "BAAK";
-                                        }elseif (Yii::$app->user->identity->id_role = "2") {
+                                        }elseif (Yii::$app->user->identity->id_role == "2") {
                                            echo  "Dosen";
                                         }else{
                                             echo "Mahasiswa";

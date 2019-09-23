@@ -11,9 +11,9 @@
                 <p><?=Yii::$app->user->identity->username?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i><?php 
-               if (Yii::$app->user->identity->id_role = "1") {
+               if (Yii::$app->user->identity->id_role == "1") {
                     echo  "BAAK";
-               }elseif (Yii::$app->user->identity->id_role = "2") {
+               }elseif (Yii::$app->user->identity->id_role == "2") {
                    echo  "Dosen";
                }else{
                     echo "Mahasiswa";
@@ -44,9 +44,11 @@
                     } elseif (Yii::$app->user->identity->id_role=='2') {
                         // $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
                          $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
+                         
+                        $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
 
-                    }else{
-                       // $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
+                    }elseif (Yii::$app->user->identity->id_role=='1'){
+                       $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
                         $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
                          $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
                          $items[] =['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']];

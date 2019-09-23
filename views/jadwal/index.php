@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\JadwalSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Jadwals';
+$this->title = 'Jadwal';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jadwal-index">

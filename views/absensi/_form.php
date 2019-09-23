@@ -20,7 +20,7 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'id_jadwal')->widget(Select2::classname(), [
                     'data' =>  Jadwal::getListJadwal(),
                     'options' => [
-                      'placeholder' => '- Pilih Jadwal-',              
+                      'placeholder' => '- Pilih Mata Kuliah-',              
                     ],
                     'pluginOptions' => [
                         'allowClear' => false
