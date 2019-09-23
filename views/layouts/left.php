@@ -43,7 +43,7 @@
 
                     } elseif (Yii::$app->user->identity->id_role=='2') {
                         // $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
-                         $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
+                         $items[] =['label' => 'Profil', 'icon' => 'dashboard', 'url' => ['/dosen/profil', 'id' => Yii::$app->user->identity->id]];
                          
                         $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
 
