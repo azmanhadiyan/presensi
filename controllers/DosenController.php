@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Dosen;
+S
 use app\models\DosenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
