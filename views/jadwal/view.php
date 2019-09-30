@@ -70,10 +70,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= Html::a($text, ['status', 'id' => $model->id_jadwal,'status'=>$text], ['class' => 'btn btn-success','style'=>'width:100%;']) ?>
         <?php
-            
-        ?>
-    
-
+            Html::a('Export to PDF', ['site/export-mpdf'], ['class' => 'btn btn-blue'])
+            ?>
      <?= GridView::widget([
         'dataProvider' => $jadwal,
         'columns' => [

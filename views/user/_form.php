@@ -18,15 +18,6 @@ use app\models\Role;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'id_role')->widget(Select2::classname(), [
-                    'data' =>  Role::getListRole(),
-                    'options' => [
-                      'placeholder' => '- Pilih Jurusan -',              
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => false
-                    ],
-                ]); ?>
 
     <?=  $form->field($model, 'status')->dropDownList([
                     '1' => 'Buka',

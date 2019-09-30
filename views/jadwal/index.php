@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->getIdKelas();
                 }
             ],
-            [
-                'attribute'=>'id_ruangan',
-                'value'=>function($data){
-                    return $data->getIdRuangan();
-                }
-            ],
+            // [
+            //     'attribute'=>'id_ruangan',
+            //     'value'=>function($data){
+            //         return $data->getIdRuangan();
+            //     }
+            // ],
             //'status',
             //'id_dosen',
 

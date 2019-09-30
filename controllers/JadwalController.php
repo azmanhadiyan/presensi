@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use Mpdf\Mpdf;
 
 /**
  * JadwalController implements the CRUD actions for Jadwal model.
@@ -181,4 +182,5 @@ class JadwalController extends Controller
             return '<div class="alert alert-danger">No data found</div>';
         }
     }
+
 }

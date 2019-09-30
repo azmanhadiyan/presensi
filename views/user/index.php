@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             'username',
-            'password',
+            // 'password',
             [
                 'attribute'=>'id_role',
                 'value'=>function($data){

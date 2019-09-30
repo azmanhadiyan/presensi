@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * AbsensiController implements the CRUD actions for Absensi model.
@@ -149,4 +152,58 @@ class AbsensiController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+   //  public function actionExportMpdf() 
+   // {
+   //       $this->absensi='index';
+   //       $model = Buku::find()->all();
+   //       $mpdf=new mPDF();
+   //       $filename = time().'_buku.pdf';
+   //       $path = 'exports/' .$filename;
+   //       $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
+   //       $mpdf->Output($path);
+   //      return $this->redirect($path);
+   // }
+
+   //  public function actionExportExcel()
+   //  {
+   //      $spreadsheet = new Spreadsheet();
+   //      $sheet = $spreadsheet->getActiveSheet();
+   //      $filename = time() . '_Excel.xlsx';
+   //      $path = 'exports/' . $filename;
+
+   //      $sheet->setCellValue('A1', 'No');
+   //      $sheet->setCellValue('B1', 'Jadwal');
+   //      $sheet->setCellValue('C1', 'Mahasiswa');
+   //      $sheet->setCellValue('D1', 'Tanggal');
+   //      $sheet->setCellValue('E1', 'Foto');
+
+   //      $semuaBuku = Absensi::find()->all();
+   //      $nomor     = 1;
+   //      $row1      = 2;
+   //      $row2      = $row1;
+   //      $row3      = $row2;
+   //      $row4      = $row3;
+   //      $row5      = $row4;
+
+   //      foreach ($Semuapresensi as $absensi) {
+   //         $sheet->setCellValue('A' . $row1++, $nomor++);
+   //         $sheet->setCellValue('B' . $row2++, $buku->id_jadwal);
+   //         $sheet->setCellValue('C' . $row3++, $buku->id_mahasiswa);
+   //         $sheet->setCellValue('D' . $row4++, $buku->tanggal);
+   //         $sheet->setCellValue('E' . $row5++, $buku->foto);         
+
+   //     }
+
+   //     $spreadsheet->getActiveSheet()
+   //     ->getStyle('A1:E' . $row5)
+   //     ->getAlignment()
+   //     ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+   //     $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+   //     $writer = new Xlsx($spreadsheet);
+   //     $writer->save($path);
+   //     return $this->redirect($path);
+   // }
+
 }

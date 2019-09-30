@@ -3,12 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-S
 use app\models\DosenSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\User;
+use app\models\Dosen;
 
 
 /**

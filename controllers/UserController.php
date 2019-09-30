@@ -71,18 +71,26 @@ class UserController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    
+
     public function actionCreate()
     {
         $model = new User();
-        $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
-            $model->save();
+        $user = new User();
+
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
+        $user->id_role = 1;
+        $user->save();
+        $model->id = $user->id;
+        $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        
         return $this->render('create', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
 
@@ -93,22 +101,30 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
+    
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = User::find()
+        ->andWhere(['id' => $id ])
+        ->one();
 
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->password = Yii::$app->getSecurity()->generatePasswordHash($model->password);
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+        $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
+        $user->id_role = 1;
+        $user->save();
+        $model->id = $user->id;
+        $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
         return $this->render('update', [
             'model' => $model,
+            'user' => $user,
         ]);
     }
-
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
