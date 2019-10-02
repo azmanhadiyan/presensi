@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Presensi', ['create'], ['class' => 'btn btn-success']) ?>
-        <!-- <?= Html::a('Export to Excel', ['absensi/export-excel'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Export to PDF', ['absensi/export-mpdf'], ['class' => 'btn btn-success']) ?> -->
+        <?= Html::a('Export to Excel', ['absensi/export'], ['class' => 'btn btn-success']) ?>
+        
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -43,8 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'tanggal',
-            'foto',
-            //'kehadiran',
+            [
+                    'attribute' => 'foto',
+                    'format' => 'raw',
+                    'value'=> function($data){
+                        if ($data->foto!=''){
+                            return $data->getFoto(['height'=>'100px']);
+                        }else {
+                            return 'no image';
+                        }
+                    }
+                ],
+            'kehadiran',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

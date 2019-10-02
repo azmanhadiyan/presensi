@@ -36,13 +36,31 @@ use kartik\file\FileInput;
                         'allowClear' => false
                     ],
                 ]); ?>
+                
+    <?= $form->field($model, 'foto')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'], 
+         'pluginOptions'=>['allowedFileExtensions'=>['jpg','png'],'showUpload' => false,'initialPreview'=>($model->foto) ?
+                Html::img($model->folder."/".$model->foto, ['width'=>'100%']):
+            '',
+                ]
+        ]);
+    ?>
    
    
+            
             <video id="video" width="640" height="480" autoplay></video>
             <button id="snap">Snap Photo</button>
             <canvas id="canvas" width="640" height="480"></canvas>
 
             <script type="text/javascript">
+
+
+
+                function showAndroidToast(res) {
+
+                    Android.dataResponse(res);
+                }
+
            // Grab elements, create settings, etc.
             var video = document.getElementById('video');
 

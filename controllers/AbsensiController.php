@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use Mpdf\Mpdf;
+use kartik\export\ExportMenu;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -153,57 +154,46 @@ class AbsensiController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-   //  public function actionExportMpdf() 
-   // {
-   //       $this->absensi='index';
-   //       $model = Buku::find()->all();
-   //       $mpdf=new mPDF();
-   //       $filename = time().'_buku.pdf';
-   //       $path = 'exports/' .$filename;
-   //       $mpdf->WriteHTML($this->renderPartial('template',['model'=>$model]));
-   //       $mpdf->Output($path);
-   //      return $this->redirect($path);
-   // }
+   public function actionExport() {
+        $spreadsheet = new Spreadsheet();
+        $sheet       = $spreadsheet->getActiveSheet();
+        $filename    = time() . '_Excel.xlsx'; // Penamaan dari filenya berikut fungsi time() yang berguna untuk penamaan unik berdasarkan waktu
+        $path        = 'exports/' . $filename; // Lokasi penyimpanan File
 
-   //  public function actionExportExcel()
-   //  {
-   //      $spreadsheet = new Spreadsheet();
-   //      $sheet = $spreadsheet->getActiveSheet();
-   //      $filename = time() . '_Excel.xlsx';
-   //      $path = 'exports/' . $filename;
+        $sheet->setCellValue('A1', 'No.');
+        $sheet->setCellValue('B1', 'Jadwal');
+        $sheet->setCellValue('C1', 'Mahasiswa');
+        $sheet->setCellValue('D1', 'Tanggal');
+        $sheet->setCellValue('E1', 'Foto');
+        $sheet->setCellValue('F1', 'Kehadiran');
+        $datakelasatlet = Absensi::find()->all();
+        $nomor     = 1;
+        $row1      = 2;
+        $row2      = $row1;
+        $row3      = $row2;
+        $row4      = $row3;
+        $row5      = $row4;
+        $row6      = $row5;
 
-   //      $sheet->setCellValue('A1', 'No');
-   //      $sheet->setCellValue('B1', 'Jadwal');
-   //      $sheet->setCellValue('C1', 'Mahasiswa');
-   //      $sheet->setCellValue('D1', 'Tanggal');
-   //      $sheet->setCellValue('E1', 'Foto');
+        foreach ($dataabsensi as $absensi) {
+            $sheet->setCellValue('A' . $row1++, $nomor++);
+            $sheet->setCellValue('B' . $row2++, $absensi->getNamaJadwal());
+            $sheet->setCellValue('C' . $row3++, $absensi->getIdMahasiswa());
+            $sheet->setCellValue('D' . $row4++, $absensi->$tanggal);
+            $sheet->setCellValue('E' . $row5++, $absensi->$foto);
+            $sheet->setCellValue('F' . $row6++, $absensi->$kehadiran);
+        }
 
-   //      $semuaBuku = Absensi::find()->all();
-   //      $nomor     = 1;
-   //      $row1      = 2;
-   //      $row2      = $row1;
-   //      $row3      = $row2;
-   //      $row4      = $row3;
-   //      $row5      = $row4;
+        $spreadsheet->getActiveSheet()
+            ->getStyle('A1:F' . $row6)
+            ->getAlignment()
+            ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-   //      foreach ($Semuapresensi as $absensi) {
-   //         $sheet->setCellValue('A' . $row1++, $nomor++);
-   //         $sheet->setCellValue('B' . $row2++, $buku->id_jadwal);
-   //         $sheet->setCellValue('C' . $row3++, $buku->id_mahasiswa);
-   //         $sheet->setCellValue('D' . $row4++, $buku->tanggal);
-   //         $sheet->setCellValue('E' . $row5++, $buku->foto);         
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx'); // Disimpan berdasarkan format 'Xlxs'
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($filename); // Disimpan didalam lokasi yang telah ditentukan
+        return $this->redirect($filename); // Redirect menuju halaman ini.
+    }
 
-   //     }
-
-   //     $spreadsheet->getActiveSheet()
-   //     ->getStyle('A1:E' . $row5)
-   //     ->getAlignment()
-   //     ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-
-   //     $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
-   //     $writer = new Xlsx($spreadsheet);
-   //     $writer->save($path);
-   //     return $this->redirect($path);
-   // }
-
+   
 }

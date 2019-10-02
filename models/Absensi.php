@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "absensi".
@@ -94,5 +95,10 @@ class Absensi extends \yii\db\ActiveRecord
         if ($model !== null) {
             return $model->nama_jadwal;
         }
+    }
+
+    public function getFoto($htmlOptions=[])
+    {
+        return Html::img($this->folder."/".$this->foto,$htmlOptions);
     }
 }

@@ -167,4 +167,29 @@ class MahasiswaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionProfil($id)
+    {
+            $model = Mahasiswa::find()
+                ->andWhere(['id' => '8'])
+                ->one();
+
+            $user = User::find()
+                ->andWhere(['id' => '8'])
+                ->one();
+
+
+        if ($model->load(Yii::$app->request->post()) && $user->load(Yii::$app->request->post())) {
+            $user->id_role = 3;
+            $user->save();
+            $model->id = $user->id;
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id_mahasiswa]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+            'user' => $user,
+        ]);
+    }
 }

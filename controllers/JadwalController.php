@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Jadwal;
 use app\models\Absensi;
+use app\models\Kelas;
 use app\models\Mahasiswa;
 use app\models\JadwalSearch;
 use app\models\Matakuliah;
@@ -13,6 +14,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * JadwalController implements the CRUD actions for Jadwal model.
@@ -182,5 +185,46 @@ class JadwalController extends Controller
             return '<div class="alert alert-danger">No data found</div>';
         }
     }
+
+    public function actionExportExcel()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $filename = time() . '_Excel.xlsx';
+        $path = 'exports/' . $filename;
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Mahasiswa');
+        $sheet->setCellValue('C1', 'Tanggal');
+        $sheet->setCellValue('D1', 'Kehadiran');
+        $sheet->setCellValue('E1', 'Foto');
+
+        $semuaBuku = Jadwal::find()->all();
+        $nomor     = 1;
+        $row1      = 2;
+        $row2      = $row1;
+        $row3      = $row2;
+        $row4      = $row3;
+        $row5      = $row4;
+
+        foreach ($Semuapresensi as $id_presensi) {
+           $sheet->setCellValue('A' . $row1++, $nomor++);
+           $sheet->setCellValue('B' . $row2++, $id_presensi->id_mahasiswa);
+           $sheet->setCellValue('C' . $row3++, $id_presensi->tanggal);
+           $sheet->setCellValue('D' . $row4++, $id_presensi->kehadiran);
+           $sheet->setCellValue('E' . $row5++, $id_presensi->foto);
+           
+       }
+
+       $spreadsheet->getActiveSheet()
+       ->getStyle('A1:E' . $row5)
+       ->getAlignment()
+       ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+       $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+       $writer = new Xlsx($spreadsheet);
+       $writer->save($path);
+       return $this->redirect($path);
+   }
 
 }

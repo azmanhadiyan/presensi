@@ -35,29 +35,29 @@
         <!-- /.search form -->
         <?php
             $items = [];
-            $items[] = ['label' => 'Menu Yii2', 'options' => ['class' => 'header']];
+            $items[] = ['label' => 'Sistem Presensi', 'options' => ['class' => 'header']];
              if (Yii::$app->user->identity->id_role=='3'){
 
                          $items[] = ['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi/create']];
-                         $items[] =['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']];
+                         $items[] =['label' => 'Profil', 'icon' => 'user', 'url' => ['/mahasiswa']];
 
                     } elseif (Yii::$app->user->identity->id_role=='2') {
                         // $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
-                         $items[] =['label' => 'Profil', 'icon' => 'dashboard', 'url' => ['/dosen/profil', 'id' => Yii::$app->user->identity->id]];
+                         $items[] =['label' => 'Profil', 'icon' => 'user', 'url' => ['/dosen/profil', 'id' => Yii::$app->user->identity->id]];
                          
-                        $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
+                        $items[] =['label' => 'Jadwal', 'icon' => 'book', 'url' => ['/jadwal']];
 
                     }elseif (Yii::$app->user->identity->id_role=='1'){
-                       $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
-                        $items[] =['label' => 'Jadwal', 'icon' => 'dashboard', 'url' => ['/jadwal']];
-                         $items[] =['label' => 'Dosen', 'icon' => 'dashboard', 'url' => ['/dosen']];
-                         $items[] =['label' => 'Mahasiswa', 'icon' => 'dashboard', 'url' => ['/mahasiswa']];
+                       $items[] =['label' => 'Presensi', 'icon' => 'book', 'url' => ['/absensi']];
+                        $items[] =['label' => 'Jadwal', 'icon' => 'leson', 'url' => ['/jadwal']];
+                         $items[] =['label' => 'Dosen', 'icon' => 'user', 'url' => ['/dosen']];
+                         $items[] =['label' => 'Mahasiswa', 'icon' => 'user', 'url' => ['/mahasiswa']];
                          $items[] =['label' => 'Matakuliah', 'icon' => 'dashboard', 'url' => ['/matakuliah']];
                          $items[] =['label' => 'Kelas', 'icon' => 'dashboard', 'url' => ['/kelas']];
                          $items[] =['label' => 'Jurusan', 'icon' => 'dashboard', 'url' => ['/jurusan']];
                          $items[] =['label' => 'Ruangan', 'icon' => 'dashboard', 'url' => ['/ruangan']];
                          $items[] =['label' => 'Role', 'icon' => 'dashboard', 'url' => ['/role']];
-                         $items[] =['label' => 'User', 'icon' => 'dashboard', 'url' => ['/user']];
+                         $items[] =['label' => 'User', 'icon' => 'user', 'url' => ['/user']];
                     }
         ?>
         <?= dmstr\widgets\Menu::widget(
