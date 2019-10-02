@@ -39,10 +39,10 @@
              if (Yii::$app->user->identity->id_role=='3'){
 
                          $items[] = ['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi/create']];
-                         $items[] =['label' => 'Profil', 'icon' => 'user', 'url' => ['/mahasiswa']];
+                         $items[] =['label' => 'Profil', 'icon' => 'user', 'url' => ['/mahasiswa/profil', 'id' => Yii::$app->user->identity->id]];
 
                     } elseif (Yii::$app->user->identity->id_role=='2') {
-                        // $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
+                        $items[] =['label' => 'Presensi', 'icon' => 'dashboard', 'url' => ['/absensi']];
                          $items[] =['label' => 'Profil', 'icon' => 'user', 'url' => ['/dosen/profil', 'id' => Yii::$app->user->identity->id]];
                          
                         $items[] =['label' => 'Jadwal', 'icon' => 'book', 'url' => ['/jadwal']];

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Mahasiswa;
 use app\models\Absensi;
 use app\models\AbsensiSearch;
 use yii\web\Controller;
@@ -74,6 +75,7 @@ class AbsensiController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->tanggal = date('Y-m-d');
             $name = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+             
 
             $structure = '../files/'.$name;
             //membuat folder

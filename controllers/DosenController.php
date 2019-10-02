@@ -108,11 +108,11 @@ class DosenController extends Controller
     public function actionProfil($id)
     {
             $model = Dosen::find()
-                ->andWhere(['id' => '11'])
+                ->andWhere(['id' => $id])
                 ->one();
 
             $user = User::find()
-                ->andWhere(['id' => '11'])
+                ->andWhere(['id' => $id])
                 ->one();
 
 

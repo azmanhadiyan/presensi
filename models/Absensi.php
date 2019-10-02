@@ -39,6 +39,7 @@ class Absensi extends \yii\db\ActiveRecord
             [['tanggal'], 'safe'],
             [['kehadiran'], 'string'],
             [['foto'], 'string', 'max' => 255],
+            [['foto'], 'file', 'extensions'=>'jpg, gif, png', 'skipOnEmpty' => true],
             [['id_jadwal'], 'exist', 'skipOnError' => true, 'targetClass' => Jadwal::className(), 'targetAttribute' => ['id_jadwal' => 'id_jadwal']],
             [['id_mahasiswa'], 'exist', 'skipOnError' => true, 'targetClass' => Mahasiswa::className(), 'targetAttribute' => ['id_mahasiswa' => 'id_mahasiswa']],
         ];

@@ -29,6 +29,7 @@ class MahasiswaController extends Controller
                         'update',
                         'delete',
                         'view',
+                        'profil',
                     ],
                     'allow'=>true,
                     'matchCallback'=>function(){
@@ -39,7 +40,7 @@ class MahasiswaController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index','view', 'create'],
+                        'actions' => ['index','view', 'create', 'profil'],
                         'roles' => ['@'],
                     ],
                 ],
@@ -171,11 +172,11 @@ class MahasiswaController extends Controller
     public function actionProfil($id)
     {
             $model = Mahasiswa::find()
-                ->andWhere(['id' => '8'])
+                ->andWhere(['id' => $id])
                 ->one();
 
             $user = User::find()
-                ->andWhere(['id' => '8'])
+                ->andWhere(['id' => $id])
                 ->one();
 
 

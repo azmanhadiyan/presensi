@@ -45,7 +45,7 @@ use kartik\file\FileInput;
                 ]
         ]);
     ?>
-   
+   <!-- 
    
             
             <video id="video" width="640" height="480" autoplay></video>
@@ -168,7 +168,7 @@ use kartik\file\FileInput;
             const mode = getComputedStyle(document.documentElement).getPropertyValue('content');
 
             // mode: "dark"   
-           </style>
+           </style> -->
             
     <?= $form->field($model, 'kehadiran')->dropDownList([ 'Hadir' => 'Hadir', 'Sakit' => 'Sakit', 'Izin' => 'Izin', 'Tanpa Keterangan' => 'Tanpa Keterangan', ], ['prompt' => '']) ?>
 

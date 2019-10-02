@@ -3,10 +3,11 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use  yii\grid\Column;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Jadwal */
-
+$jadwal;
 $this->title = $model->nama_jadwal;
 $this->params['breadcrumbs'][] = ['label' => 'Jadwals', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -69,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
 
         <?= Html::a($text, ['status', 'id' => $model->id_jadwal,'status'=>$text], ['class' => 'btn btn-success','style'=>'width:100%;']) ?>
-
+        
      <?= GridView::widget([
         'dataProvider' => $jadwal,
         'columns' => [
@@ -84,9 +85,64 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'tanggal',
             'kehadiran',
+            // [
+            //         'attribute' => 'foto',
+            //         'format' => 'raw',
+            //         'value'=> function($data){
+            //             if ($data->foto!=''){
+            //                 return $data->getFoto(['height'=>'100px']);
+            //             }else {
+            //                 return 'no image';
+            //             }
+            //         }
+            //     ],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+                   [
+          'class' => 'yii\grid\ActionColumn',
+          'header' => 'Actions',
+          'headerOptions' => ['style' => 'color:#337ab7'],
+          'template' => '{view}{update}{delete}',
+          'buttons' => [
+            'view' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-view'),
+                ]);
+            },
+
+            'update' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-update'),
+                ]);
+            },
+            'delete' => function ($url, $model) {
+                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                            'title' => Yii::t('app', 'lead-delete'),
+                ]);
+            }
+
+          ],
+          'urlCreator' => function ($action, $model, $key, $index, $jadwal) {
+            if ($action === 'view') {
+                $url ='index.php?r=client-login/lead-view&id='.'id_mahasiswa';
+                return $url;
+            }
+
+            if ($action === 'update') {
+                $url ='index.php?r=client-login/lead-update&id='.'id_mahasiswa';
+                return $url;
+            }
+            if ($action === 'delete') {
+                $url ='index.php?r=client-login/lead-delete&id='.'id_mahasiswa';
+                return $url;
+            }
+
+          }
+          ],
+
+          ],
+
+
+          
     ]); ?>
 
 
